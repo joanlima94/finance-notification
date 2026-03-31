@@ -52,6 +52,7 @@ type QuoteOutput struct {
 	RegularMarketChangePercent float64                    `json:"regularMarketChangePercent"`
 	RegularMarketVolume        int64                      `json:"regularMarketVolume"`
 	HistoricalDataPrice        *HistoricalDataPriceOutput `json:"historicalDataPrice,omitempty"`
+	CreatedAt                  string                     `json:"createdAt"`
 }
 
 func unixToDate(timestamp int64) string {
@@ -66,6 +67,7 @@ func ToQuoteOutput(q Quote) QuoteOutput {
 		RegularMarketChange:        q.RegularMarketChange,
 		RegularMarketChangePercent: q.RegularMarketChangePercent,
 		RegularMarketVolume:        q.RegularMarketVolume,
+		CreatedAt:                  time.Now().Format("02/01/2006 15:04:05"),
 	}
 	if len(q.HistoricalDataPrice) > 0 {
 		price := q.HistoricalDataPrice[len(q.HistoricalDataPrice)-1]
